@@ -90,7 +90,7 @@ For Each ws In ThisWorkbook.Worksheets
         Cells(3, 18).Value = GrDec
         Cells(4, 18).Value = GrTv
         ActiveSheet.Columns("A:R").AutoFit
-Next ws
+	Next ws
 
 End Sub
 
