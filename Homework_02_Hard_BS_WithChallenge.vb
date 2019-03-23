@@ -1,15 +1,15 @@
 Sub HomeworkHard()
 
 Dim ws As Worksheet
-    
+
 For Each ws In ThisWorkbook.Worksheets
     ws.Activate
-    
+
     Dim ticker, grinct, grdect, grtvt As String
-    Dim totalvolume, OpenYear, CloseYear, YearlyChange, PercentChange, GrInc, GrDec, GrTv, lrow As Double
+    Dim totalvolume, OpenYear, CloseYear, YearlyChange, PercentChange, GrInc, GrDec, GrTv, lrow As Long
     Dim output, output2 As Integer
-    
-    
+
+
         output = 2
         output2 = 2
         Cells(1, 9) = "Ticker"
@@ -21,15 +21,15 @@ For Each ws In ThisWorkbook.Worksheets
         Cells(2, 16) = "Greatest % Increase"
         Cells(3, 16) = "Greatest % Decrease"
         Cells(4, 16) = "Greatest Total Volume"
-        
+
         GrInc = 0
         GrDec = 0
         GrTv = 0
-        
+
         OpenYear = Cells(2, 3).Value
-		
+
 		lrow = Cells(Rows.Count, 1).End(xlUp).Row
-        
+
         For i = 2 To lrow
             ticker = Cells(i, 1)
             If ticker <> Cells(i + 1, 1) Then
@@ -42,45 +42,45 @@ For Each ws In ThisWorkbook.Worksheets
                 Cells(output, 10).Value = YearlyChange
                 Cells(output, 11).Value = PercentChange
                 Cells(output, 11).NumberFormat = "0.00%"
-    
+
                 OpenYear = Cells(i + 1, 3).Value
-                    
+
                     If YearlyChange >= 0 Then
                         Cells(output, 10).Interior.ColorIndex = 4
-                    
+
                         ElseIf YearlyChange < 0 Then
                         Cells(output, 10).Interior.ColorIndex = 3
-                    
+
                     End If
-                    
+
                 If GrInc < PercentChange Then
                     GrInc = PercentChange
                     grinct = ticker
-                    
+
                     ElseIf GrDec > PercentChange Then
                         GrDec = PercentChange
                         grdect = ticker
                 End If
-                
+
                 If GrTv < totalvolume Then
                     GrTv = totalvolume
                     grtvt = ticker
                 End If
-                            
-                
+
+
                 totalvolume = 0
                 output = output + 1
-                    
+
             ElseIf ticker = Cells(i + 1, 1) Then
                 totalvolume = totalvolume + Cells(i, 7)
-            
+
             ElseIf Cells(i, 1) = " " Then
                 Exit For
-            
+
             End If
-           
+
         Next i
-         
+
         Cells(2, 17) = grinct
         Cells(2, 18).NumberFormat = "0.00%"
         Cells(3, 17) = grdect
@@ -93,10 +93,3 @@ For Each ws In ThisWorkbook.Worksheets
 	Next ws
 
 End Sub
-
-
-
-
-
-
-
